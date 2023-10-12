@@ -1,33 +1,41 @@
+
+ <form [formGroup]="registerForm" (ngSubmit)="registerNewUser(registerForm)" >
+
+
+
 <div class="flex flex-column">
 
-    <span class="text-lg mb-4">Register
-        <mat-icon>account_circle</mat-icon>
+
+    <span style="text-align: center;" class="text-lg mb-4">
+      <mat-icon>account_circle</mat-icon>
+      Register
     </span>
 
-  
 
         <mat-form-field>
             <mat-label>User</mat-label>
-            <input type="text" matInput placeholder="User name">
+            <input type="text"  formControlName="user" matInput placeholder="User name">
         </mat-form-field>
-            
+
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="Password">
-        </mat-form-field>   
+            <input type="password"  formControlName="password" matInput placeholder="Password">
+        </mat-form-field>
 
         <mat-form-field>
             <mat-label>Repeat Password</mat-label>
-            <input type="password" matInput placeholder="Password">
-        </mat-form-field> 
-        
+            <input type="password" formControlName="reppassword" matInput placeholder="Password">
+        </mat-form-field>
+
             <button mat-button mat-flat-button color="primary">
                 <mat-icon>cre</mat-icon>
                 Create
             </button>
-            
+
             <div class="flex jsutify-content-end mt-5">
                 <a routerLink="/auth/login">I already have an account</a>
             </div>
-            
+
 </div>
+
+ </form>

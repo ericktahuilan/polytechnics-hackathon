@@ -1,0 +1,123 @@
+{
+  "login": [
+    {
+      "id": "1",
+      "accessToken": "XXXYYZZ-Token",
+      "rol": "11"
+    }
+
+  ],
+  "InfoUserDTO": [
+    {
+      "id": "1",
+      "username": "etahui",
+      "rol": "11",
+      "token": "AAAAAAAAAAAA"
+    },
+    {
+      "id": "2",
+      "username": "lzaraz",
+      "rol": "22",
+      "token": "BBBBBBBBBBBBB"
+    }
+  ],
+  "mdmUsers": [
+    {
+      "id": "1",
+      "Username": "etahui",
+      "Password": "QWEQWEREETERTRETYYY",
+      "Email": "erickT@hexaware.com"
+    },
+    {
+      "id": "2",
+      "Username": "lzaraz",
+      "Password": "ZXCZVCVBCVBCBCNCVNC",
+      "Email": "lzaraz@hexaware.com"
+    },
+    {
+      "id": "3",
+      "Username": "cgastel",
+      "Password": "JJJKJKJJHKHJKHYYYUY",
+      "Email": "cgastel@hexaware.com"
+    }
+  ],
+  "CopyCustomers": [
+    {
+      "id": "copy-1",
+      "OriginalDbCatalogId": 1,
+      "OriginalDbId": 1230,
+      "Username": "Erick Daniel",
+      "FirstName": "Tahuilan",
+      "LastName": "Luna",
+      "CURP": "TALE860615asdfre12",
+      "Passport": "",
+      "Email": "erick.tahui@gmail.com"
+    },
+    {
+      "id": "copy-2",
+      "OriginalDbCatalogId": 1,
+      "OriginalDbId": 1231,
+      "Username": "Lorenzo",
+      "FirstName": "Gonzalez",
+      "LastName": "Padua",
+      "CURP": "GOPL851109ASDGTR08",
+      "Passport": "",
+      "Email": "test-2@testmail.com"
+    },
+    {
+      "id": "copy-3",
+      "OriginalDbCatalogId": 1,
+      "OriginalDbId": 1232,
+      "Username": "Abril",
+      "FirstName": "Sanchez",
+      "LastName": "Lopez",
+      "CURP": "SALO821105HDFHNR34",
+      "Passport": "",
+      "Email": "test-3@testmail.com"
+    }
+  ],
+  "databaseCatalog": [
+    {
+      "id": 1,
+      "DbName": "Retail"
+    },
+    {
+      "id": 2,
+      "DbName": "Insurance"
+    },
+    {
+      "id": 3,
+      "DbName": "Assets"
+    },
+    {
+      "id": 4,
+      "DbName": "Commercial"
+    }
+  ],
+  "StagingCustomers": [
+    {
+      "id": "1",
+      "GUID": "AAAAAAAAAAAAAAA",
+      "OriginalDbCatalogId": 1,
+      "OriginalDbId": 1230,
+      "Username": "Erick Daniel",
+      "FirstName": "Tahuilan",
+      "LastName": "Luna",
+      "CURP": "TALE860615asdfre12",
+      "Passport": "",
+      "Email": "erick.tahui@gmail.com"
+    }
+  ],
+  "FinalizedCustomers": [
+    {
+      "id": "1",
+      "GUID": "AAAAAAAAAAAAAAA",
+      "Username": "Erick Daniel",
+      "FirstName": "Tahuilan",
+      "LastName": "Luna",
+      "CURP": "TALE860615asdfre12",
+      "Passport": "",
+      "Email": "erick.tahui@gmail.com"
+    }
+  ]
+}

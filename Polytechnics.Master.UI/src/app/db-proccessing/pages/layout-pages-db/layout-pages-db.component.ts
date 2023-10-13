@@ -10,12 +10,15 @@ export class LayoutPagesDBComponent {
 
 
   public sidebarItems = []= [
-      { label:'Load Database', icon:'database', url:'./load' },
-      { label:'Match Fields', icon:'maker-check', url:'./match' },
-      { label:'Process Database', icon:'database-sync', url:'./processing' },
+      { label:'Load Database', icon:'autorenew', url:'./load' },
+      { label:'Match Fields', icon:'check_circle', url:'./match' },
+      { label:'Processed Results', icon:'backup', url:'./processing' },
   ];
 
 
-//autorenew
+  // <mat-icon>compare_arrows</mat-icon>
+  // <mat-icon>contact_support</mat-icon>
+  // <mat-icon>face</mat-icon>
+
 
 }

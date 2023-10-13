@@ -8,6 +8,8 @@ import { DbProccessingModule } from './db-proccessing/db-proccessing.module';
 
 
 import { AppComponent } from './app.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AppComponent } from './app.component';
       AppRoutingModule,
       AuthModule,
       DbProccessingModule,
+      MatSortModule,
+      MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

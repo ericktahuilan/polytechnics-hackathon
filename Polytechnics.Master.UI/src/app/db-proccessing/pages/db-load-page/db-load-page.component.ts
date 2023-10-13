@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
-import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material/sort';
+import { CopyTable } from '../../interfaces/db-processing.interface';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class DbLoadPageComponent implements OnInit {
   dataSource:any;
   displayedColumns:any[] = [];
   showCopyTable: boolean= false;
-  dtCopyDB: any;
+  //dtCopyDB: any;
 
   PersoalIds: any[] = [
     {value: '1', viewValue: 'CURP - Unified Key population Register'},
@@ -66,7 +66,7 @@ export class DbLoadPageComponent implements OnInit {
     }
 
   createTable() {
-    let tableArr: Element[] = [
+    let tableArr: CopyTable[] = [
       { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
       { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
       { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
@@ -95,9 +95,3 @@ export class DbLoadPageComponent implements OnInit {
 }
 
 
-export interface Element {
-  position: number,
-  name: string,
-  weight: number,
-  symbol: string
-}

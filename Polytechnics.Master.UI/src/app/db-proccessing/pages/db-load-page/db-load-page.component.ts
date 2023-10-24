@@ -5,21 +5,34 @@ import { Router } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { CopyTable } from '../../interfaces/db-processing.interface';
+//import { CopyTable } from '../../interfaces/db-processing.interface';
+import { DBService } from '../../services/db-processing.service';
+
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
   selector: 'app-db-load-page',
   templateUrl: './db-load-page.component.html',
   styles: [
-  ]
+  ],
+  providers: [DBService]
 })
 export class DbLoadPageComponent implements OnInit {
 
+  bussy: boolean= false;
   dataSource:any;
   displayedColumns:any[] = [];
   showCopyTable: boolean= false;
-  //dtCopyDB: any;
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+ 
+  constructor(private dbService: DBService ,private router: Router){
+   
+  }
+
 
   PersoalIds: any[] = [
     {value: '1', viewValue: 'CURP - Unified Key population Register'},
@@ -30,58 +43,114 @@ export class DbLoadPageComponent implements OnInit {
   ];
 
 
-  constructor( private router: Router){
-
-  }
-
-
-
-
-  @ViewChild(MatSort) sort!: MatSort;
-
-  /**
-   * Pre-defined columns list for user table
-   */
-  columnNames = [{
-    id: 'position',
-    value: 'No.',
-
-  }, {
-    id: 'name',
-    value: 'Name',
-  },
+    columnNames = [
     {
-      id: 'weight',
-      value: 'Weight',
+      id: 'guid',
+      value: 'guid',
     },
     {
-      id: 'symbol',
-      value: 'Symbol',
-    }];
+    id: 'originalDB',
+    value: 'OriginalDB',
 
+  }, {
+    id: 'originalDBID',
+    value: 'OriginalDBID',
+  },
+    {
+      id: 'username',
+      value: 'Username',
+    },
+       
+    {
+      id: 'firstName',
+      value: 'FirstName',
+    },
+    
+    {
+      id: 'lastName',
+      value: 'LastName',
+    },
+    
+    {
+      id: 'curp',
+      value: 'CURP',
+    },
+    
+    {
+      id: 'passport',
+      value: 'Passport',
+    },
+    {
+      id: 'email',
+      value: 'Email',
+    }
+  ];
 
+   
     ngOnInit() {
-      this.displayedColumns = this.columnNames.map(x => x.id);
-      this.createTable();
+      //this.displayedColumns = this.columnNames.map(x => x.id);
+      this.displayedColumns = ['username', 'firstName', 'lastName', 'curp', 'passport', 'email'];
     }
 
-  createTable() {
-    let tableArr: CopyTable[] = [
-      { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-      { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-      { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-      { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-      { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-      { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    ];
-    this.dataSource = new MatTableDataSource(tableArr);
-    this.dataSource.sort = this.sort;
+
+
+
+    createTable() {
+      console.log('Enter createTable');
+
+
+      this.dbService.getCopiedCustomers().subscribe((resp: any) =>{
+      console.log('resp');
+      this.showCopyTable = true;  
+      console.log(JSON.stringify(resp));
+    
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
+    });
+
+
+
+   
+
   }
 
 
   copydb(){
     console.log('Enter to copydb');
-    this.showCopyTable = true;
+    this.bussy = true;
+    
+    this.dbService.copyCustomers().subscribe((response: any)=>{
+      
+      this.bussy = false;
+      console.log(response);
+      
+      if(response){
+        
+         
+        this.createTable();
+       
+        //this.router.navigate(['/db'])
+
+      }else{
+        console.log('We could not copy data please try later');
+        //this.alert.error('We could not copy data please try later');
+      }
+
+
+    }, (error: any)=>{
+        this.bussy= false;
+        console.log('Service error:', error);
+        return;
+        //this.alert.error('Invalid Information');
+
+    });
+
+
+
+
+
   }
 
   stagingDB(){

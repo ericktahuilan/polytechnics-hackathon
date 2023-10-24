@@ -14,15 +14,80 @@
 <br>
 
 
-<mat-table  #table [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}}</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element[column.id]}}</mat-cell>
-  </ng-container>
+ <mat-table *ngIf="showCopyTable" #table [dataSource]="dataSource" matSort>
+ 
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+<!-- 
+ first aproach OK
+ 
+ <ng-container matColumnDef="select">
+  <th mat-header-cell *matHeaderCellDef>
+    <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+    </mat-checkbox>
+  </th>
+  <td mat-cell *matCellDef="let row">
+    <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)">
+    </mat-checkbox>
+  </td>
+</ng-container>
+
+<ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+  <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}}</mat-header-cell>
+  <mat-cell *matCellDef="let element"> {{element[column.id]}}</mat-cell>
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+
+
+  
+ -->
+
+
+
+
+ 
+ <ng-container matColumnDef="select">
+  <th mat-header-cell *matHeaderCellDef>
+    <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+    </mat-checkbox>
+  </th>
+  <td mat-cell *matCellDef="let row">
+    <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)">
+    </mat-checkbox>
+  </td>
+</ng-container>
+
+<ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+  <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}}</mat-header-cell>
+  <mat-cell *matCellDef="let element"> {{element[column.id]}}</mat-cell>
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+
+
+
+
+
 </mat-table>
+
+
+<mat-paginator #paginator
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>
+
 
 
 

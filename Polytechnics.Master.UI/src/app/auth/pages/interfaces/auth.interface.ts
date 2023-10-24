@@ -7,7 +7,7 @@ export interface UserMDM {
 }
 
 
-/*
+
 export interface CredentialsDTO {
   user:       string,
   password:   string,
@@ -22,4 +22,4 @@ export interface InfoUserDTO {
   token:        string,
 }
 
-*/
+

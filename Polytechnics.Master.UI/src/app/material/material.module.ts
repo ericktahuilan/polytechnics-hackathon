@@ -15,7 +15,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -35,7 +36,10 @@ import { MatTableModule } from '@angular/material/table';
     MatSidenavModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    
   ]
 })
 export class MaterialModule { }

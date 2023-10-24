@@ -9,7 +9,7 @@ import { CryptoService } from '../services/crypto.service';
   selector: 'app-login-pages',
   templateUrl: './login-pages.component.html',
   styleUrls: ['./login-pages.component.css'],
-  providers: [AuthService]
+  providers: [AuthService,CryptoService]
 })
 export class LoginPagesComponent implements OnInit {
 
@@ -41,6 +41,10 @@ constructor(private fb: FormBuilder,
   authorize(submittedForm: FormGroup){
     console.log('Enter to authorize');
     this.bussy= true;
+
+    //this is only for testing- remove after
+    this.router.navigate(['/db'])
+    return;
 
     const request = {
       user:     this.loginForm.value.user,

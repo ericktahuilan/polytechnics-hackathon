@@ -62,6 +62,9 @@ constructor(private fb: FormBuilder,
         //Verify Session of the user
 
         console.log('token: ',data);
+
+        //this.alert.error('Invalid Information');
+
         //if(all is OK)
         this.router.navigate(['/db'])
 

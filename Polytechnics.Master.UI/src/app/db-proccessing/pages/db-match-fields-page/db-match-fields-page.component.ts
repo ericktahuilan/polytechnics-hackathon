@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { DBService } from '../../services/db-processing.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
-import { StagingCustomerDto } from '../../interfaces/db-processing.interface';
+import { GuidList, StagingCustomers } from '../../interfaces/db-processing.interface';
 
 
 
@@ -25,7 +25,7 @@ export class DbMatchFieldsPageComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  selection = new SelectionModel<StagingCustomerDto>(true, []);
+  selection = new SelectionModel<StagingCustomers>(true, []);
 
   
 
@@ -270,15 +270,48 @@ export class DbMatchFieldsPageComponent implements OnInit {
 
     console.log(this.selection);
 
-    //call to finalize/customers  with all list of selected textbox 
-    //[
-    //   {
-    //     "guid": "string"
-    //   }
-    // ]
+    let GuidsSelected: GuidList[] = [];  
 
-    //and after that  redirect to show all finalized items
-   // this.router.navigate(['/db/processing'])
+    
+    this.selection.selected.forEach((r,index)=>{
+      
+      console.log( this.selection.selected[index].guid);
+      GuidsSelected.push({"guid":`${r.guid}`});
+
+    });
+
+    let objJsonGuids= JSON.stringify( GuidsSelected );
+    console.log( objJsonGuids);
+
+
+    this.dbService.finalizeCustomers(objJsonGuids).subscribe((response: any)=>{
+      
+      console.log('finalizeCustomers response: ');
+      console.log(response);
+      
+      if(response){
+            this.router.navigate(['/db/processing'])
+      }else{
+        console.log('We could not finalize data please try later');
+        //this.alert.error('We could not finalize data please try later');
+      }
+
+
+    }, (error: any)=>{
+        console.log('Service error:', error);
+        return;
+        //this.alert.error('Invalid Information');
+
+    });
+
+
+
+    /*
+    [{"guid":"0070D91E-5E56-4811-91FB-13600772256E"},
+      {"guid":"00AE8E9D-FDCF-4079-919E-64DA9412185A"},
+      {"guid":"011B8E1A-D479-48FF-88D6-386E43B2816B"},
+    */
+
 
   }
 
@@ -300,7 +333,7 @@ isAllSelected() {
 masterToggle() {
   this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach( (row: StagingCustomerDto) => this.selection.select(row));
+      this.dataSource.data.forEach( (row: StagingCustomers) => this.selection.select(row));
 }
 
 

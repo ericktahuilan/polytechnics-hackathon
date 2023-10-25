@@ -24,7 +24,22 @@ export interface StagingCustomerDto {
 }
 
 
+export interface StagingCustomers {
+  guid: string,
+  originalDB: string,
+  originalDBID: string,
+  username: string,
+  firstName: string,
+  lastName: string,
+  curp: string,
+  Passport: string,
+  email: string,
+}
 
+
+export interface GuidList {
+  guid: string
+}
 
 export interface CopyTable {
   OriginalDB: string,

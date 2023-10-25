@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environments } from 'src/environments/environments';
-import { CopyTable, DbInformation,StagingCustomerGuidDto } from '../interfaces/db-processing.interface';
+import { CopyTable, DbInformation,GuidList,StagingCustomerGuidDto } from '../interfaces/db-processing.interface';
 import { Observable } from 'rxjs';
 
 
@@ -207,7 +207,7 @@ export class DBService {
 
       confirmStaging(  ): Observable<any>{
         console.log('----Enter to confirmStaging-----');
-        
+
         // const headers = { 'content-type': 'application/json'}
         // const body= ''; 
         // console.log(body)
@@ -228,6 +228,7 @@ export class DBService {
   
   
       getStaging(  ): Observable<any>{ 
+        console.log('----Enter to getStaging-----');
             return this.http.get(`${ this.baseUrl}/staging/customers`);
         }
   
@@ -235,13 +236,14 @@ export class DBService {
 
 
 
-        finalizeCustomers(value: StagingCustomerGuidDto[] ): Observable<any>{
+        finalizeCustomers(listGuids: string ): Observable<any>{
+            console.log('----Enter to finalizeCustomers-----');
 
             const headers = { 'content-type': 'application/json'}
-            const body= ''; 
+            const body= listGuids; 
             console.log(body)
       
-              return this.http.post(`${ this.baseUrl}/finalize/customers`,body,{'headers':headers});
+              return this.http.post(`${ this.baseUrl}/finalize/customers`,body,{'headers':headers, responseType: 'text'});
           }
       
       

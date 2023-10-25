@@ -1,13 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-//import { CopyTable } from '../../interfaces/db-processing.interface';
 import { DBService } from '../../services/db-processing.service';
-
 import { MatPaginator } from '@angular/material/paginator';
 
 
@@ -124,15 +120,13 @@ export class DbLoadPageComponent implements OnInit {
     this.dbService.copyCustomers().subscribe((response: any)=>{
       
       this.bussy = false;
+      console.log('copydb response: ');
       console.log(response);
       
       if(response){
-        
-         
+                
         this.createTable();
        
-        //this.router.navigate(['/db'])
-
       }else{
         console.log('We could not copy data please try later');
         //this.alert.error('We could not copy data please try later');
@@ -147,18 +141,45 @@ export class DbLoadPageComponent implements OnInit {
 
     });
 
-
-
-
-
   }
+
+
+
 
   stagingDB(){
     console.log('Enter to stagingDB');
     this.showCopyTable = false;
-    this.router.navigate(['/db/match'])
+
+    //call ws to staging rows.... pendding   
+    this.dbService.confirmStaging().subscribe((response: any)=>{
+      
+      this.bussy = false;
+      console.log('confirmStaging response: ');
+      console.log(response);
+      
+      if(response){
+        
+          this.router.navigate(['/db/match']);
+
+      }else{
+        console.log('We could not staging data, please try later');
+        //this.alert.error('We could not staging data please try later');
+      }
+
+
+    }, (error: any)=>{
+        this.bussy= false;
+        console.log('Service error:', error);
+        return;
+        //this.alert.error('Invalid Information');
+
+    });
 
   }
+
+
+
+
 
 
 }

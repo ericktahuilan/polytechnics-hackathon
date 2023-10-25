@@ -59,7 +59,7 @@ export class DBService {
 
 
 
-    getCopiedCustomersTest( ): any{ 
+      getCopiedCustomersTest( ): any{ 
 
             var copied = [
                 {
@@ -206,12 +206,24 @@ export class DBService {
 
 
       confirmStaging(  ): Observable<any>{
-
-        const headers = { 'content-type': 'application/json'}
-        const body= ''; 
-        console.log(body)
+        console.log('----Enter to confirmStaging-----');
+        
+        // const headers = { 'content-type': 'application/json'}
+        // const body= ''; 
+        // console.log(body)
   
-          return this.http.post(`${ this.baseUrl}/confirm/staging`,body,{'headers':headers});
+        //   return this.http.post(`${ this.baseUrl}/confirm/staging`,body,{'headers':headers});
+
+          const headers = { 'content-type': 'plain/text'}
+          const body= ''; 
+          console.log(body)
+    
+            return this.http.post(`${ this.baseUrl}/confirm/staging`,body, 
+            {'headers':headers, responseType: 'text'});
+    
+           
+
+
       }
   
   
@@ -234,6 +246,7 @@ export class DBService {
       
       
           getFinalized(  ): Observable<any>{ 
+            console.log('----Enter to getFinalized-----')
                 return this.http.get(`${ this.baseUrl}/finalized/customers`);
             }
       

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FinalizedTable } from '../../interfaces/db-processing.interface';
+import { DBService } from '../../services/db-processing.service';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-db-processing-page',
   templateUrl: './db-processing-page.component.html',
@@ -14,25 +16,19 @@ import { FinalizedTable } from '../../interfaces/db-processing.interface';
 })
 export class DbProcessingPageComponent {
 
-
-
+  bussy: boolean= false;
   dataSource:any;
   displayedColumns:any[] = [];
-  //dtCopyDB: any;
+  showCopyTable: boolean= false;
 
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor( private router: Router){
+ 
+  constructor( private dbService: DBService ,private router: Router){
 
   }
 
-
-
-
-  @ViewChild(MatSort) sort!: MatSort;
-
-  /**
-   * Pre-defined columns list for user table
-   */
   
   columnNames = [
     {
@@ -78,12 +74,39 @@ export class DbProcessingPageComponent {
   ];
 
 
+   
+
     ngOnInit() {
-      this.displayedColumns = this.columnNames.map(x => x.id);
+      //this.displayedColumns = this.columnNames.map(x => x.id);
+      this.displayedColumns = ['guid','username', 'firstName', 'lastName', 'curp', 'passport', 'email'];
       this.createTable();
     }
 
-  createTable() {
+
+
+
+    createTable() {
+      console.log('Enter createTable-finalized');
+
+
+      this.dbService.getFinalized().subscribe((resp: any) =>{
+      console.log('finalized');
+      this.showCopyTable = true;  
+      console.log(JSON.stringify(resp));
+    
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
+    });
+
+    
+  }
+
+
+
+
+  createTableTest() {
     // let tableArr: FinalizedTable[] = [
     //   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
     //   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
